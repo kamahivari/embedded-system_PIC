@@ -1,0 +1,43 @@
+[PROJECT]
+Target=main1.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.117d
+Compiler=PCM
+CCSVersion=5.117d
+[Target Data]
+FileList=main1.c
+[Directories]
+Include=
+[C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-3\3-1\main1]
+Type=4
+[mru-list]
+1=main1.c
+
+[Opened Files]
+1=main1.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=1
+D1=27-03-2024
+D1_L=8
+D1_L1=[59373]Project Closed.
+D1_L2=[59373]Project Opened.
+D1_L3=[60984]Started Editing.
+D1_L4=[61447]Stopped Editing.
+D1_L5=[62024]Started Editing.
+D1_L6=[62340]Stopped Editing.
+D1_L7=[62900]Started Editing.
+D1_L8=[62910]Project Closed.
+
+[fileformats]
+forcecoff=0
+[main1.c]
+Type=4
+
+[defines]
+buildcount=4
+[Units]
+Count=1
+1=main1 (main)
