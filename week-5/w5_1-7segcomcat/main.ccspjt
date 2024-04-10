@@ -1,0 +1,19 @@
+[PROJECT]
+Target=C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_1-7segcomcat\main.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_1-7segcomcat\main]
+Type=4
+[mru-list]
+1=main.c
+[Units]
+Count=1
+1=main (main)
+[Opened Files]
+1=main.c
+2=
