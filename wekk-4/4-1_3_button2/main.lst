@@ -1,0 +1,175 @@
+CCS PCM C Compiler, Version 5.007, 61971               10-Nis-24 19:00
+
+               Filename:   C:\Users\Onur\Documents\GitHub\embedded-system_PIC\wekk-4\4-1_3_button2\main.lst
+
+               ROM used:   97 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           8 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <main.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4000000) 
+....................  
+....................  
+.................... #fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG 
+....................  
+.................... #use delay(clock=4M) 
+0004:  MOVLW  23
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  
+.................... void main() 
+0019:  BSF    03.5
+001A:  BSF    1F.0
+001B:  BSF    1F.1
+001C:  BSF    1F.2
+001D:  BCF    1F.3
+001E:  MOVLW  07
+001F:  MOVWF  1C
+0020:  BCF    03.7
+0021:  MOVLW  1F
+0022:  ANDWF  03,F
+.................... { 
+....................  
+....................    set_tris_b(0x00); 
+0023:  MOVLW  00
+0024:  MOVWF  06
+....................    set_tris_d(0x03); //2 buton var artik o yüzden 0x03 verildi 
+0025:  MOVLW  03
+0026:  MOVWF  08
+....................    int k=0,x=1; 
+0027:  BCF    03.5
+0028:  CLRF   21
+0029:  MOVLW  01
+002A:  MOVWF  22
+....................    output_b(0); //baslangicta tum LED ler sonuk olsun 
+002B:  BSF    03.5
+002C:  CLRF   06
+002D:  BCF    03.5
+002E:  CLRF   06
+....................     
+....................     
+....................    while(TRUE) 
+....................    { 
+....................       //TODO: User Code 
+....................        
+....................       if(input(pin_d0)==1) 
+002F:  BSF    03.5
+0030:  BSF    08.0
+0031:  BCF    03.5
+0032:  BTFSS  08.0
+0033:  GOTO   047
+....................       { 
+....................          x=1; 
+0034:  MOVLW  01
+0035:  MOVWF  22
+....................          for(k=0;k<8;k++){ 
+0036:  CLRF   21
+0037:  MOVF   21,W
+0038:  SUBLW  07
+0039:  BTFSS  03.0
+003A:  GOTO   047
+....................          output_b(x); 
+003B:  BSF    03.5
+003C:  CLRF   06
+003D:  BCF    03.5
+003E:  MOVF   22,W
+003F:  MOVWF  06
+....................          x=x*2; 
+0040:  BCF    03.0
+0041:  RLF    22,F
+....................          delay_ms(200); 
+0042:  MOVLW  C8
+0043:  MOVWF  23
+0044:  CALL   004
+0045:  INCF   21,F
+0046:  GOTO   037
+....................           
+....................          } 
+....................           
+....................          
+....................       } 
+....................        
+....................       if(input(pin_d1)==1) 
+0047:  BSF    03.5
+0048:  BSF    08.1
+0049:  BCF    03.5
+004A:  BTFSS  08.1
+004B:  GOTO   05F
+....................       { 
+....................          x=128; 
+004C:  MOVLW  80
+004D:  MOVWF  22
+....................          for(k=0;k<8;k++){ 
+004E:  CLRF   21
+004F:  MOVF   21,W
+0050:  SUBLW  07
+0051:  BTFSS  03.0
+0052:  GOTO   05F
+....................          output_b(x); 
+0053:  BSF    03.5
+0054:  CLRF   06
+0055:  BCF    03.5
+0056:  MOVF   22,W
+0057:  MOVWF  06
+....................          x=x/2; 
+0058:  BCF    03.0
+0059:  RRF    22,F
+....................          delay_ms(200); 
+005A:  MOVLW  C8
+005B:  MOVWF  23
+005C:  CALL   004
+005D:  INCF   21,F
+005E:  GOTO   04F
+....................           
+....................          } 
+....................          
+....................       } 
+005F:  GOTO   02F
+....................    } 
+....................     
+.................... } 
+....................  
+0060:  SLEEP
+....................  
+....................  
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
