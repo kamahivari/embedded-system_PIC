@@ -1,0 +1,164 @@
+CCS PCM C Compiler, Version 5.007, 61971               11-Nis-24 14:45
+
+               Filename:   C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_1-2_7segcom_hepbasbutton\main.lst
+
+               ROM used:   102 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   16 (4%) at main() level
+                           18 (5%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... #include <main.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4000000) 
+....................  
+....................  
+.................... #fuses XT, NOWDT, NOPROTECT,NOBROWNOUT, NOLVP, NOPUT,NOWRT, NODEBUG 
+....................  
+.................... #use delay(clock=4M) 
+0004:  MOVLW  2C
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   057 (RETURN)
+....................  
+....................  
+.................... int sayilar []={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0xFF,0xEF}; 
+*
+0025:  MOVLW  3F
+0026:  BCF    03.5
+0027:  MOVWF  20
+0028:  MOVLW  06
+0029:  MOVWF  21
+002A:  MOVLW  5B
+002B:  MOVWF  22
+002C:  MOVLW  4F
+002D:  MOVWF  23
+002E:  MOVLW  66
+002F:  MOVWF  24
+0030:  MOVLW  6D
+0031:  MOVWF  25
+0032:  MOVLW  7D
+0033:  MOVWF  26
+0034:  MOVLW  07
+0035:  MOVWF  27
+0036:  MOVLW  FF
+0037:  MOVWF  28
+0038:  MOVLW  EF
+0039:  MOVWF  29
+....................  
+.................... void main() 
+*
+001B:  BSF    03.5
+001C:  BSF    1F.0
+001D:  BSF    1F.1
+001E:  BSF    1F.2
+001F:  BCF    1F.3
+0020:  MOVLW  07
+0021:  MOVWF  1C
+0022:  BCF    03.7
+0023:  MOVLW  1F
+0024:  ANDWF  03,F
+.................... { 
+....................     
+....................    set_tris_a(0x06); 
+*
+003A:  MOVLW  06
+003B:  BSF    03.5
+003C:  MOVWF  05
+....................    set_tris_b(0x00); 
+003D:  MOVLW  00
+003E:  MOVWF  06
+....................    output_b(0x00); 
+003F:  CLRF   06
+0040:  BCF    03.5
+0041:  CLRF   06
+....................    output_a(0x04); 
+0042:  BSF    03.5
+0043:  CLRF   05
+0044:  MOVLW  04
+0045:  BCF    03.5
+0046:  MOVWF  05
+....................    int sayi=0; 
+0047:  CLRF   2A
+....................     
+....................    while(TRUE) 
+....................    { 
+....................     
+....................       if(input(pin_a1)==1){ 
+0048:  BSF    03.5
+0049:  BSF    05.1
+004A:  BCF    03.5
+004B:  BTFSS  05.1
+004C:  GOTO   059
+....................          sayi++; 
+004D:  INCF   2A,F
+....................          if(sayi==10)sayi=0; 
+004E:  MOVF   2A,W
+004F:  SUBLW  0A
+0050:  BTFSC  03.2
+0051:  CLRF   2A
+....................          delay_ms(300); 
+0052:  MOVLW  02
+0053:  MOVWF  2B
+0054:  MOVLW  96
+0055:  MOVWF  2C
+0056:  GOTO   004
+0057:  DECFSZ 2B,F
+0058:  GOTO   054
+....................       } 
+....................     output_b(sayilar[sayi]); 
+0059:  MOVLW  20
+005A:  ADDWF  2A,W
+005B:  MOVWF  04
+005C:  BCF    03.7
+005D:  MOVF   00,W
+005E:  MOVWF  2B
+005F:  BSF    03.5
+0060:  CLRF   06
+0061:  BCF    03.5
+0062:  MOVF   2B,W
+0063:  MOVWF  06
+0064:  GOTO   048
+....................    } 
+....................  
+.................... } 
+0065:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

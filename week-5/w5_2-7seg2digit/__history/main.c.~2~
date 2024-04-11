@@ -1,0 +1,20 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG
+
+#use delay(clock=4M)
+
+#define display_2 pin_a0
+#define display_1 pin_a1
+
+int birler=0,onlar=0,sayi=0;
+int sayilar []={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0xFF,0xEF};
+
+void main()
+{
+
+   while(TRUE)
+   {
+      //TODO: User Code
+   }
+
+}

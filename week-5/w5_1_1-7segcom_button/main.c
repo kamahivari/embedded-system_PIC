@@ -13,15 +13,18 @@ void main()
    set_tris_b(0x00);
    output_b(0x00);
    output_a(0x04);
-   //int say=0;
+  
    
    while(TRUE)
    {
-      //TODO: User Code
+   
+      if(input(pin_a1)==1){
+      output_b(0);
       for(int i =0;i<10;i++)
       {
          output_b(sayilar[i]);
          delay_ms(500);
+      }
       }
    }
 

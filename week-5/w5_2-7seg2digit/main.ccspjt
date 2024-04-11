@@ -7,8 +7,8 @@ CCSVersion=5.007
 [Target Data]
 FileList=main.c
 [Directories]
-Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_1-7segcomcat\
-[C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_1-7segcomcat\main]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_2-7seg2digit\
+[C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-5\w5_2-7seg2digit\main]
 Type=4
 [mru-list]
 1=main.c

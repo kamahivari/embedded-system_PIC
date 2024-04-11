@@ -13,16 +13,17 @@ void main()
    set_tris_b(0x00);
    output_b(0x00);
    output_a(0x04);
-   //int say=0;
+   int sayi=0;
    
    while(TRUE)
    {
-      //TODO: User Code
-      for(int i =0;i<10;i++)
-      {
-         output_b(sayilar[i]);
-         delay_ms(500);
+   
+      if(input(pin_a1)==1){
+         sayi++;
+         if(sayi==10)sayi=0;
+         delay_ms(300);
       }
+    output_b(sayilar[sayi]);
    }
 
 }
