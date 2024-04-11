@@ -1,0 +1,41 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG
+
+#use delay(clock=4M)
+
+//#define use_portb_lcd TRUE
+//port d kullandigimiz icin bu ifadeye gerek yok , DEFAUL deger PORT D
+
+#include <lcd.c>
+
+char z;
+int i = 5;
+
+
+void main()
+{
+   lcd_init();
+   printf(lcd_putc,"\f");
+   printf(lcd_putc,"DENEME");
+   printf(lcd_putc,"\nTEST");
+   delay_ms(1000);
+   
+   while(TRUE)
+   {
+      printf(lcd_putc,"\f");
+      printf(lcd_putc,"i=%d",i);
+      delay_ms(1000);
+      
+      printf(lcd_putc,"\f");
+      lcd_gotoxy(3,1);
+      printf(lcd_putc,"Hosgeldiniz");
+      z=lcd_getc(6,1);
+      delay_ms(1000);
+      
+      printf(lcd_putc,"\f");
+      printf(lcd_putc,"z=%c",z);
+      
+      
+   }
+
+}
