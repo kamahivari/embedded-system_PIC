@@ -1,0 +1,208 @@
+CCS PCM C Compiler, Version 5.007, 61971               12-Nis-24 17:17
+
+               Filename:   C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-6\w6_5-timerint-button\main.lst
+
+               ROM used:   120 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   13 (4%) at main() level
+                           14 (4%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   047
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  BTFSS  0B.5
+0018:  GOTO   01B
+0019:  BTFSC  0B.2
+001A:  GOTO   02C
+001B:  MOVF   22,W
+001C:  MOVWF  04
+001D:  MOVF   23,W
+001E:  MOVWF  77
+001F:  MOVF   24,W
+0020:  MOVWF  78
+0021:  MOVF   25,W
+0022:  MOVWF  79
+0023:  MOVF   26,W
+0024:  MOVWF  7A
+0025:  MOVF   20,W
+0026:  MOVWF  0A
+0027:  SWAPF  21,W
+0028:  MOVWF  03
+0029:  SWAPF  7F,F
+002A:  SWAPF  7F,W
+002B:  RETFIE
+002C:  BCF    0A.3
+002D:  BCF    0A.4
+002E:  GOTO   02F
+.................... #include <main.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=4000000) 
+....................  
+....................  
+.................... #fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG 
+....................  
+.................... #use delay(clock=4M) 
+....................  
+.................... #use fast_io(b) 
+.................... #use fast_io(a) 
+....................  
+....................  
+.................... int sayi=0; 
+....................  
+.................... #int_timer0 
+....................  
+.................... void timer0_kesmesi(){ 
+....................     
+....................    //set_timer0(250); //butona 5 kere basilacak , 6.basiþta bir led yanacak 
+....................    set_timer0(254);  //254-256'ya ulasacak 2 kez butona basinca ulasacak , 3.basista led yanacak 
+002F:  MOVLW  FE
+0030:  MOVWF  01
+....................    sayi++; 
+0031:  INCF   27,F
+....................    if(sayi%2==1){ 
+0032:  MOVF   27,W
+0033:  ANDLW  01
+0034:  SUBLW  01
+0035:  BTFSS  03.2
+0036:  GOTO   039
+....................    output_high(pin_b0); 
+0037:  BSF    06.0
+....................    output_low(pin_b1); 
+0038:  BCF    06.1
+....................    } 
+....................    if(sayi%2==0){ 
+0039:  MOVF   27,W
+003A:  ANDLW  01
+003B:  BTFSS  03.2
+003C:  GOTO   03F
+....................       output_high(pin_b1); 
+003D:  BSF    06.1
+....................       output_low(pin_b0); 
+003E:  BCF    06.0
+....................    } 
+....................     
+....................    if(sayi==15)sayi=0; 
+003F:  MOVF   27,W
+0040:  SUBLW  0F
+0041:  BTFSC  03.2
+0042:  CLRF   27
+0043:  BCF    0B.2
+0044:  BCF    0A.3
+0045:  BCF    0A.4
+0046:  GOTO   01B
+.................... } 
+....................  
+.................... void main() 
+0047:  CLRF   27
+0048:  BSF    03.5
+0049:  BSF    1F.0
+004A:  BSF    1F.1
+004B:  BSF    1F.2
+004C:  BCF    1F.3
+004D:  MOVLW  07
+004E:  MOVWF  1C
+004F:  BCF    03.7
+0050:  MOVLW  1F
+0051:  ANDWF  03,F
+.................... { 
+....................    setup_psp(PSP_DISABLED); 
+0052:  BCF    09.4
+....................    setup_timer_1(T1_DISABLED); 
+0053:  BCF    03.5
+0054:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0055:  MOVLW  00
+0056:  MOVWF  78
+0057:  MOVWF  12
+0058:  MOVLW  00
+0059:  BSF    03.5
+005A:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS); 
+005B:  BSF    1F.0
+005C:  BSF    1F.1
+005D:  BSF    1F.2
+005E:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+005F:  BCF    03.5
+0060:  BCF    1F.0
+....................     
+....................    setup_CCP1(CCP_OFF); 
+0061:  MOVLW  F0
+0062:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF); 
+0063:  ANDWF  1D,F
+....................  
+....................    set_tris_b(0x00); 
+0064:  MOVLW  00
+0065:  BSF    03.5
+0066:  MOVWF  06
+....................    set_tris_a(0x10); 
+0067:  MOVLW  10
+0068:  MOVWF  05
+....................    output_b(0x00); 
+0069:  BCF    03.5
+006A:  CLRF   06
+....................     
+....................   //1'er 1'er artar 254-256 arasini 1 er 1er ilerler 
+....................    setup_timer_0(RTCC_EXT_H_TO_L|RTCC_DIV_1);  
+006B:  BSF    03.5
+006C:  MOVF   01,W
+006D:  ANDLW  C7
+006E:  IORLW  38
+006F:  MOVWF  01
+....................   //set_timer0(250); //butona 5 kere basilacak , 6.basiþta bir led yanacak 
+....................    set_timer0(254); 
+0070:  MOVLW  FE
+0071:  BCF    03.5
+0072:  MOVWF  01
+....................     
+....................     
+....................    enable_interrupts(INT_timer0); 
+0073:  BSF    0B.5
+....................    enable_interrupts(GLOBAL); 
+0074:  MOVLW  C0
+0075:  IORWF  0B,F
+....................  
+....................  
+....................    while(TRUE){} 
+0076:  GOTO   076
+....................  
+.................... } 
+0077:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

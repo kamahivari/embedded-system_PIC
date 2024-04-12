@@ -1,0 +1,58 @@
+#include <main.h>
+#fuses XT,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG
+
+#use delay(clock=4M)
+
+#use fast_io(b)
+#use fast_io(a)
+
+
+int sayi=0;
+
+#int_timer0
+
+void timer0_kesmesi(){
+   
+   //set_timer0(250); //butona 5 kere basilacak , 6.basiþta bir led yanacak
+   set_timer0(254);  //254-256'ya ulasacak 2 kez butona basinca ulasacak , 3.basista led yanacak
+   sayi++;
+   if(sayi%2==1){
+   output_high(pin_b0);
+   output_low(pin_b1);
+   }
+   if(sayi%2==0){
+      output_high(pin_b1);
+      output_low(pin_b0);
+   }
+   
+   if(sayi==15)sayi=0;
+}
+
+void main()
+{
+   setup_psp(PSP_DISABLED);
+   setup_timer_1(T1_DISABLED);
+   setup_timer_2(T2_DISABLED,0,1);
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   
+   setup_CCP1(CCP_OFF);
+   setup_CCP2(CCP_OFF);
+
+   set_tris_b(0x00);
+   set_tris_a(0x10);
+   output_b(0x00);
+   
+  //1'er 1'er artar 254-256 arasini 1 er 1er ilerler
+   setup_timer_0(RTCC_EXT_H_TO_L|RTCC_DIV_1); 
+  //set_timer0(250); //butona 5 kere basilacak , 6.basiþta bir led yanacak
+   set_timer0(254);
+   
+   
+   enable_interrupts(INT_timer0);
+   enable_interrupts(GLOBAL);
+
+
+   while(TRUE){}
+
+}
