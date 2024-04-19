@@ -1,0 +1,101 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     lcdlat
+008     PSP_DATA
+008     lcd
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020-021 deger
+022     lcd_init.i
+022     @PSTRINGCN7_647.P1
+022-023 @PRINTF_LU_647.P2
+023     lcd_init.@SCRATCH1
+023     @PSTRINGCN7_647.@SCRATCH1
+024     @PSTRINGCN7_647.@SCRATCH2
+024     @PRINTF_LU_647.@SCRATCH1
+025     @PSTRINGCN7_647.@SCRATCH3
+025     @PRINTF_LU_647.@SCRATCH2
+026     @PSTRINGCN7_647.@SCRATCH4
+026     @PRINTF_LU_647.@SCRATCH3
+027     @PRINTF_LU_647.@SCRATCH4
+028     @PRINTF_LU_647.@SCRATCH5
+029     @PRINTF_LU_647.@SCRATCH6
+02A     @PRINTF_LU_647.@SCRATCH7
+02B     lcd_putc.c
+02C     @delay_ms1.P1
+02C     lcd_gotoxy.x
+02D     lcd_gotoxy.y
+02E     lcd_gotoxy.address
+02F     lcd_gotoxy.@SCRATCH1
+030     lcd_send_byte.address
+031     lcd_send_byte.n
+032     lcd_read_byte.low
+032     lcd_send_byte.@SCRATCH1
+033     lcd_send_nibble.n
+033     lcd_read_byte.high
+034     lcd_read_byte.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+088     lcdtris
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const663.call
+000012  @delay_ms1
+000027  lcd_send_nibble
+000033  lcd_read_nibble
+000039  lcd_send_byte
+00003F  lcd_read_byte
+000079  lcd_init
+0000AC  lcd_gotoxy
+0000BE  lcd_putc
+0000EA  @PSTRINGCN7_647
+000140  @PRINTF_LU_647
+0001A5  MAIN
+0001A5  @cinit1
+0001AE  @cinit2
+
+Project Directory:
+    C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-7\w7_1-potansiyometre\
+
+Project Files:
+    16F877A.c                                               [19-Nis-24 15:23  CRC=949C5F5C]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [21-Haz-13 16:04  CRC=4E65664C]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c [23-Aðu-12 09:01  CRC=D28E8746]
+
+Source signature=881ED434
+
+Units:
+    16F877A (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   16F877A.xsym
+    Errors:      16F877A.err
+    Ext Symbols: 16F877A.esym
+    INHX8:       16F877A.hex
+    Symbols:     16F877A.sym
+    List:        16F877A.lst
+    Debug/COFF:  16F877A.cof
+    Project:     16F877A.ccspjt
+    Call Tree:   16F877A.tre
+    Statistics:  16F877A.STA
