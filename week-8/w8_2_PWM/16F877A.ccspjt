@@ -1,0 +1,22 @@
+[PROJECT]
+Target=16F877A.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.007
+Compiler=PCM
+CCSVersion=5.007
+[Target Data]
+FileList=16F877A.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[C:\Users\Onur\Documents\GitHub\embedded-system_PIC\week-8\w8_2_PWM\16F877A]
+Type=4
+[mru-list]
+1=16F877A.c
+[Opened Files]
+1=16F877A.c
+2=
+[16F877A.c]
+Type=4
+[Units]
+Count=1
+1=16F877A (main)
